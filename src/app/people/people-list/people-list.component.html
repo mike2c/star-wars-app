@@ -1,11 +1,18 @@
 <link-component></link-component>
-<table class="table table-striped table-hover">
-  <tr *ngFor="let people of peoples">
-    <td [innerText]="people.name"></td>
-    <td [innerText]="people.height"></td>
-    <td [innerText]="people.homeworld"></td>
-    <td>
-      <a href="people/{{people.id}}">More Details</a>
-    </td>
-  </tr>
-</table>
+<div class="row">
+  <div class="col-md-12">
+    <table class="table table-striped table-hover">
+      <tbody>
+        <tr *ngFor="let people of peoples">
+          <td [innerText]="people.name"></td>
+          <td [innerText]="people.height"></td>
+          <td [innerText]="people.homeworld"></td>
+          <td>
+            <a href="people/{{people.id}}">More Details</a>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+

@@ -1,0 +1,25 @@
+.sign {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 50px;
+}
+
+.sign > img {
+  width: 50%;
+  height: auto;
+  object-fit: contain;
+}
+
+.sign-title {
+  color: #D4D4D4;
+  font-weight: bold;
+  font-size: 3em;
+}
+
+@media screen and (max-width: 600px) {
+  .sign > img {
+    width: 80%;
+  }
+}

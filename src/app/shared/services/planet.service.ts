@@ -6,13 +6,11 @@ import { Planet } from '../models/planet.model';
 @Injectable({ providedIn: 'root' })
 export class PlanetService {
 
-  private static planets:Map<string, Planet> = new Map<string, Planet>();
+  private planets:Map<string, Planet> = new Map<string, Planet>();
 
-  constructor(private http: HttpClient) {
-    this.requestPlanets();
-  }
+  constructor(private http: HttpClient) { }
 
-  private requestPlanets() {
+  public requestPlanets() {
 
     return this.http.get<any>('https://swapi.dev/api/planets')
     .pipe(
@@ -31,14 +29,18 @@ export class PlanetService {
 
           values.set(planet.url, value);
         });
+        console.log('request done');
 
         return values;
       }
-    )).subscribe({ next: (data) => PlanetService.planets = data });
+    )).subscribe({ next: (data) => this.planets = data });
   }
 
   public get(url: string): (Planet | undefined) {
-    return PlanetService.planets.get(url);
+    return this.planets.get(url);
   }
 
+  public isEmpty(): boolean {
+    return this.planets.size === 0 || !(this.planets);
+  }
 }

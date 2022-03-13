@@ -13,7 +13,11 @@ export class PeopleService {
 
   private people$: BehaviorSubject<Array<People>> = new BehaviorSubject<Array<People>>([]);
 
-  constructor(private http: HttpClient, private planetService: PlanetService) { }
+  constructor(private http: HttpClient, private planetService: PlanetService) {
+
+    if(planetService.isEmpty())
+      this.planetService.requestPlanets();
+  }
 
   public get peoples(): Observable<Array<People>> {
       return this.people$.asObservable();
@@ -69,7 +73,7 @@ export class PeopleService {
      * escenarios anteriores.
      */
 
-    const id: string = (<string>value.url).substring(value.url.lastIndexOf('/') - 1, value.url.lastIndexOf('/'));
+    const id: string = (<string>value.url).substring(value.url.lastIndexOf('/', value.url.length - 2) + 1, value.url.lastIndexOf('/'));
 
     const person = new People();
     person.id = parseInt(id);

@@ -58,7 +58,7 @@ export class FilmsService {
 
   private mapFilm(value: any): Film {
 
-    const id: string = (<string>value.url).substring(value.url.lastIndexOf('/') - 1, value.url.lastIndexOf('/'));
+    const id: string = (<string>value.url).substring(value.url.lastIndexOf('/', value.url.length - 2) + 1, value.url.lastIndexOf('/'));
 
     let film = new Film();
     film.id = parseInt(id);

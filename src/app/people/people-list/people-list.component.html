@@ -8,7 +8,7 @@
           <td [innerText]="people.height"></td>
           <td [innerText]="people.homeworld"></td>
           <td>
-            <a href="people/{{people.id}}">More Details</a>
+            <a [routerLink]="'/people/' + people.id">More Details</a>
           </td>
         </tr>
       </tbody>

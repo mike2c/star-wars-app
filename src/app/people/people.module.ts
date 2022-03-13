@@ -6,6 +6,8 @@ import { PeopleRoutingModule } from './people-routing.module';
 import { LinkModule } from '../components/link/link.module';
 import { RouterModule } from '@angular/router';
 import { PeopleDetailComponent } from './people-detail/people-detail.component';
+import { PlanetService } from '../shared/services/planet.service';
+import { PeopleService } from './people.service';
 
 @NgModule({
   declarations: [
@@ -19,6 +21,6 @@ import { PeopleDetailComponent } from './people-detail/people-detail.component';
     LinkModule,
     PeopleRoutingModule,
   ],
-  providers: []
+  providers: [PlanetService]
 })
 export class PeopleModule { }

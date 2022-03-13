@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { BehaviorSubject } from 'rxjs/internal/BehaviorSubject';
 import { Observable } from 'rxjs/internal/Observable';
 import { map, take } from 'rxjs/operators';
 import { PlanetService } from '../shared/services/planet.service';
@@ -10,7 +11,13 @@ import { People } from './people.model';
 })
 export class PeopleService {
 
+  private people$: BehaviorSubject<Array<People>> = new BehaviorSubject<Array<People>>([]);
+
   constructor(private http: HttpClient, private planetService: PlanetService) { }
+
+  public get peoples(): Observable<Array<People>> {
+      return this.people$.asObservable();
+  }
 
   get(id: number): Observable<People> {
 
@@ -18,13 +25,28 @@ export class PeopleService {
     .pipe(map<any, People>(result => this.mapPeople(result)));
   }
 
+  search(value: string): Observable<Array<People>> {
+
+    this.http.get<any>(`https://swapi.dev/api/people?search=${value}`)
+    .pipe(
+      map<any, Array<People>>(result => result.results.map((value: any) => this.mapPeople(value)),
+      take(10))
+    )
+    .subscribe({ next: result => this.people$.next(result) },);
+
+    return this.people$.asObservable();
+  }
+
   getPeoples(): Observable<Array<People>> {
 
-    return this.http.get<any>('https://swapi.dev/api/people')
+    this.http.get<any>('https://swapi.dev/api/people')
     .pipe(map<any, Array<People>>(result =>
         result.results.map((value: any) => this.mapPeople(value)
       )), take(10)
-    );
+    )
+    .subscribe({ next: result => this.people$.next(result) },);
+
+    return this.people$.asObservable();;
   }
 
   private mapHeight(height: number) {
@@ -56,8 +78,6 @@ export class PeopleService {
     person.gender = value.gender;
     person.mass = value.mass;
     person.homeworld = this.planetService.get(value.homeworld)?.name ?? 'unknown';
-
-    // console.log(this.planetService.get(value.homeworld));
 
     return person;
   }

@@ -44,6 +44,13 @@ export class AppComponent implements OnDestroy {
         queryParamsHandling: 'merge',
       });
 
+    }else{
+
+      this.router.navigate([],
+        {
+          relativeTo: this.activatedRoute,
+          queryParamsHandling: '',
+        });
     }
   }
 

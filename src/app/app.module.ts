@@ -1,21 +1,24 @@
+import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { LinkComponent } from './link/link.component';
+import { PlanetService } from './shared/services/planet.service';
+import { SearchService } from './shared/services/search.service';
 @NgModule({
   declarations: [
-    AppComponent,
-    LinkComponent
+    AppComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    FormsModule
+    FormsModule,
+    HttpClientModule,
+
   ],
   providers: [
-    // SearchService,
+    SearchService
   ],
   bootstrap: [AppComponent]
 })

@@ -1,7 +1,7 @@
 import { Component, ElementRef, OnDestroy, ViewChild } from '@angular/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { Subscription } from 'rxjs/internal/Subscription';
-import { SearchService } from './search-service';
+import { SearchService } from './shared/services/search.service';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -49,13 +49,6 @@ export class AppComponent implements OnDestroy {
 
   selectSearch(value: string) {
     this.router.navigateByUrl(value);
-
-  }
-
-  seeRoute(){
-    alert("hola mundo")
-    console.log(this.router.url);
-
   }
 
   ngOnDestroy(): void {

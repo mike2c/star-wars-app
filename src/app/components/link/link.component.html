@@ -1,0 +1,5 @@
+<ul class="menu">
+  <li class="menu-item" [ngClass]="{ 'active': (link.path === tab) }" *ngFor="let link of links">
+    <a routerLink="/{{link.path}}"> {{ link.label }} </a>
+  </li>
+</ul>

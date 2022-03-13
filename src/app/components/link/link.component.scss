@@ -1,0 +1,29 @@
+.menu {
+  list-style: none;
+  border: 1px solid red;
+  margin: 20px 0;
+}
+
+.menu > .active {
+}
+
+.menu > .active > a {
+  background-color: #e3e3e3;
+
+}
+
+.menu-item {
+  display: inline-block;
+  margin: 10px;
+}
+
+.menu-item a {
+  color: #1565c0;
+  text-decoration: none;
+  border-radius: 20px;
+  padding: 4px 10px;
+}
+
+.menu-item a:hover {
+  text-decoration: underline;
+}

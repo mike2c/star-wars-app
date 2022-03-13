@@ -62,6 +62,11 @@ body {
   background: #ccc;
 }
 
+.content-right {
+  display: flex;
+  justify-content: flex-end;
+}
+
 @media screen and (max-width: 600px) {
 
   .topnav .search-container {

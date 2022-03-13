@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { ILink } from './link';
 
 @Component({
@@ -34,6 +34,9 @@ export class LinkComponent implements OnInit {
       path: "vehicles",
     },
   ];
+
+  @Input()
+  tab: string = 'people';
 
   constructor() { }
 

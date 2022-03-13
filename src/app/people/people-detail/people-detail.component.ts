@@ -10,17 +10,26 @@ import { PeopleService } from '../people.service';
 })
 export class PeopleDetailComponent implements OnInit {
 
-  people!: People;
+  people: People | undefined = new People();
 
-  constructor(private peopleService: PeopleService, private activatedRoute: ActivatedRoute) {
+  constructor(private peopleService: PeopleService, private activatedRoute: ActivatedRoute) { }
+
+  ngOnInit(): void {
 
     this.activatedRoute.params.subscribe({
       next: params => {
-        this.peopleService.get(params.id).subscribe(result => this.people = result);
+        this.peopleService.get(params.id).subscribe(
+          {
+            next: result => {
+              this.people = result;
+            },
+            error: error => {
+              this.people = undefined;
+            }
+          });
       }
     });
-  }
 
-  ngOnInit(): void { }
+  }
 
 }

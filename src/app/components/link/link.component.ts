@@ -36,12 +36,10 @@ export class LinkComponent implements OnInit {
   ];
 
   @Input()
-  tab: string = 'people';
+  tab!: string;
 
   constructor() { }
 
-  ngOnInit(): void {
-
-  }
+  ngOnInit(): void { }
 
 }

@@ -1,0 +1,18 @@
+<link-component tab="films"></link-component>
+<div class="row">
+  <div class="col-md-12">
+    <table class="table table-striped table-hover">
+      <tbody>
+        <tr *ngFor="let film of films">
+          <td [innerText]="film.title"></td>
+          <td [innerText]="film.director"></td>
+          <td [innerText]="film.episodeId"></td>
+          <td>
+            <a href="films/{{film.id}}">More Details</a>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+

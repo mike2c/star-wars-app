@@ -1,0 +1,51 @@
+<link-component tab="films"></link-component>
+
+<div *ngIf="film">
+  <h4>Details</h4>
+  <hr>
+  <div class="row">
+    <div class="col-md-6">
+      <div class="field">
+        <label class="field-label">Title</label>
+        <div class="field-value">{{ film.title }}</div>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="field">
+        <label class="field-label">Director</label>
+        <div class="field-value">{{ film.director }}</div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-6">
+      <div class="field">
+        <label class="field-label">Episode</label>
+        <div class="field-value">{{ film.episodeId }}</div>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="field">
+        <label class="field-label">Producer</label>
+        <div class="field-value">{{ film.producer }}</div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12">
+      <div class="field">
+        <label class="field-label">Opening crawl</label>
+        <div class="field-value">{{ film.openingCrawl }}</div>
+      </div>
+    </div>
+  </div>
+  <hr>
+  <div class="row">
+    <div class="col-md-12 content-right">
+      <a class="btn btn-primary" routerLink="/films">Back</a>
+    </div>
+  </div>
+</div>
+<div *ngIf="!film">
+  <h4 class="text-center message">Film not found</h4>
+</div>

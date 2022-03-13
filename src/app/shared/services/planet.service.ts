@@ -3,10 +3,10 @@ import { Injectable } from '@angular/core';
 import { map } from 'rxjs/operators';
 import { Planet } from '../models/planet.model';
 
-@Injectable({providedIn: 'root'})
+@Injectable({ providedIn: 'root' })
 export class PlanetService {
 
-  private planets:Map<string, Planet> = new Map<string, Planet>();
+  private static planets:Map<string, Planet> = new Map<string, Planet>();
 
   constructor(private http: HttpClient) {
     this.requestPlanets();
@@ -34,11 +34,11 @@ export class PlanetService {
 
         return values;
       }
-    )).subscribe({ next: (data: any) => this.planets = data });
+    )).subscribe({ next: (data) => PlanetService.planets = data });
   }
 
   public get(url: string): (Planet | undefined) {
-    return this.planets.get(url);
+    return PlanetService.planets.get(url);
   }
 
 }

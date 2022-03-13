@@ -13,6 +13,10 @@ const routes: Routes = [
     path: ':id',
     component: PeopleDetailComponent
   },
+  {
+    path: '**',
+    component: PeopleListComponent
+  },
 ];
 
 @NgModule({

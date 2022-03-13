@@ -29,10 +29,12 @@ export class PeopleService {
 
     this.http.get<any>(`https://swapi.dev/api/people?search=${value}`)
     .pipe(
-      map<any, Array<People>>(result => result.results.map((value: any) => this.mapPeople(value)),
-      take(10))
+      take(10),
+      map<any, Array<People>>(
+        result => result.results.map((value: any) => this.mapPeople(value)
+      ))
     )
-    .subscribe({ next: result => this.people$.next(result) },);
+    .subscribe({ next: result => this.people$.next(result) });
 
     return this.people$.asObservable();
   }
@@ -40,9 +42,11 @@ export class PeopleService {
   getPeoples(): Observable<Array<People>> {
 
     this.http.get<any>('https://swapi.dev/api/people')
-    .pipe(map<any, Array<People>>(result =>
+    .pipe(
+      take(10),
+      map<any, Array<People>>(result =>
         result.results.map((value: any) => this.mapPeople(value)
-      )), take(10)
+      ))
     )
     .subscribe({ next: result => this.people$.next(result) },);
 

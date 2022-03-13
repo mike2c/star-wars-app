@@ -4,7 +4,6 @@ import { FormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { SearchService } from './shared/services/search.service';
 import { NotFoundComponent } from './components/not-found/not-found.component';
 import { LinkModule } from './components/link/link.module';
 @NgModule({
@@ -19,9 +18,7 @@ import { LinkModule } from './components/link/link.module';
     HttpClientModule,
     LinkModule
   ],
-  providers: [
-    SearchService
-  ],
+  providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

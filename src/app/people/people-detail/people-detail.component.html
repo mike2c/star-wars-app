@@ -1,8 +1,9 @@
-<link-component></link-component>
+<link-component tab="people"></link-component>
 
-<h4>Details</h4>
+<div *ngIf="people">
+  <h4>Details</h4>
 <hr>
-<div class="row" *ngIf="people">
+<div class="row" >
   <div class="col-md-6">
     <div class="field">
       <label class="field-label">Name</label>
@@ -10,69 +11,73 @@
     </div>
   </div>
   <div class="col-md-6">
-    <div class="field">
-      <label class="field-label">Gender</label>
-      <div class="field-value">{{ people.gender }}</div>
+      <div class="field">
+        <label class="field-label">Gender</label>
+        <div class="field-value">{{ people.gender }}</div>
+      </div>
     </div>
   </div>
-</div>
-<div class="row" *ngIf="people">
-  <div class="col-md-6">
-    <div class="field">
-      <label class="field-label">Birth year</label>
-      <div class="field-value">{{ people.birthyear }}</div>
+  <div class="row">
+    <div class="col-md-6">
+      <div class="field">
+        <label class="field-label">Birth year</label>
+        <div class="field-value">{{ people.birthyear }}</div>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="field">
+        <label class="field-label">Homeworld</label>
+        <div class="field-value">{{ people.homeworld }}</div>
+      </div>
     </div>
   </div>
-  <div class="col-md-6">
-    <div class="field">
-      <label class="field-label">Homeworld</label>
-      <div class="field-value">{{ people.homeworld }}</div>
-    </div>
-  </div>
-</div>
 
-<div class="row" *ngIf="people">
-  <div class="col-md-6">
-    <div class="field">
-      <label class="field-label">Height</label>
-      <div class="field-value">{{ people.height }}</div>
+  <div class="row">
+    <div class="col-md-6">
+      <div class="field">
+        <label class="field-label">Height</label>
+        <div class="field-value">{{ people.height }}</div>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="field">
+        <label class="field-label">Mass</label>
+        <div class="field-value">{{ people.mass }}</div>
+      </div>
     </div>
   </div>
-  <div class="col-md-6">
-    <div class="field">
-      <label class="field-label">Mass</label>
-      <div class="field-value">{{ people.mass }}</div>
-    </div>
-  </div>
-</div>
 
-<div class="row" *ngIf="people">
-  <div class="col-md-6">
-    <div class="field">
-      <label class="field-label">Hair color</label>
-      <div class="field-value">{{ people.hairColor }}</div>
+  <div class="row">
+    <div class="col-md-6">
+      <div class="field">
+        <label class="field-label">Hair color</label>
+        <div class="field-value">{{ people.hairColor }}</div>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="field">
+        <label class="field-label">Eye color</label>
+        <div class="field-value">{{ people.eyeColor }}</div>
+      </div>
     </div>
   </div>
-  <div class="col-md-6">
-    <div class="field">
-      <label class="field-label">Eye color</label>
-      <div class="field-value">{{ people.eyeColor }}</div>
-    </div>
-  </div>
-</div>
 
-<div class="row" *ngIf="people">
-  <div class="col-md-6">
-    <div class="field">
-      <label class="field-label">Hair color</label>
-      <div class="field-value">{{ people.skinColor }}</div>
+  <div class="row">
+      <div class="col-md-6">
+      <div class="field">
+        <label class="field-label">Hair color</label>
+        <div class="field-value">{{ people.skinColor }}</div>
+      </div>
     </div>
   </div>
-</div>
-<hr>
-<div class="row">
-  <div class="col-md-12 content-right">
-    <a class="btn btn-primary" routerLink="/people">Back</a>
+  <hr>
+  <div class="row">
+    <div class="col-md-12 content-right">
+      <a class="btn btn-primary" routerLink="/people">Back</a>
+    </div>
   </div>
-</div>
 
+</div>
+<div *ngIf="!people">
+  <h2 class="text-center message">Character not found</h2>
+</div>

@@ -14,6 +14,10 @@ const routes: Routes = [
     loadChildren: () => import('./people/people.module').then(a => a.PeopleModule)
   },
   {
+    path: 'films',
+    loadChildren: () => import('./films/films.module').then(a => a.FilmsModule)
+  },
+  {
     path: "**",
     component: NotFoundComponent
   },

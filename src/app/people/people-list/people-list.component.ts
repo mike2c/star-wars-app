@@ -14,15 +14,16 @@ export class PeopleListComponent implements OnInit, OnDestroy {
   peoples:Array<People> = new Array<People>();
   search: string = '';
 
-  private paramSubscription!: Subscription;
+  private paramsSub!: Subscription;
+  private peopleSub!: Subscription;
 
   constructor(private peopleService: PeopleService, private activatedRoute: ActivatedRoute) { }
 
   ngOnInit(): void {
 
-    this.peopleService.peoples.subscribe({ next: result => this.peoples = result });
+    this.peopleSub = this.peopleService.peoples.subscribe({ next: result => this.peoples = result });
 
-    this.paramSubscription = this.activatedRoute.queryParams.subscribe({
+    this.paramsSub = this.activatedRoute.queryParams.subscribe({
       next: (params) => {
 
         if(params.search){
@@ -36,7 +37,8 @@ export class PeopleListComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.paramSubscription.unsubscribe();
+    this.paramsSub.unsubscribe();
+    this.peopleSub.unsubscribe();
   }
 
   loadPeople(search: string) {

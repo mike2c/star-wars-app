@@ -1,6 +1,6 @@
 <link-component tab="people"></link-component>
 
-<div *ngIf="people">
+<div *ngIf="people; else nothingFound">
   <h4>Details</h4>
 <hr>
 <div class="row" >
@@ -78,6 +78,10 @@
   </div>
 
 </div>
-<div *ngIf="!people">
-  <h2 class="text-center message">Character not found</h2>
-</div>
+
+<ng-template #nothingFound>
+  <div>
+    <h2 class="text-center message">Character not found</h2>
+  </div>
+</ng-template>
+

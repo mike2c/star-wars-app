@@ -1,9 +1,9 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { forkJoin, zip } from 'rxjs';
 import { BehaviorSubject } from 'rxjs/internal/BehaviorSubject';
 import { Observable } from 'rxjs/internal/Observable';
-import { map, take } from 'rxjs/operators';
-import { PlanetService } from '../shared/services/planet.service';
+import { map, take, tap } from 'rxjs/operators';
 import { People } from './people.model';
 
 @Injectable({
@@ -13,10 +13,8 @@ export class PeopleService {
 
   private people$: BehaviorSubject<Array<People>> = new BehaviorSubject<Array<People>>([]);
 
-  constructor(private http: HttpClient, private planetService: PlanetService) {
+  constructor(private http: HttpClient) {
 
-    if(planetService.isEmpty())
-      this.planetService.requestPlanets();
   }
 
   public get peoples(): Observable<Array<People>> {
@@ -52,9 +50,9 @@ export class PeopleService {
         result.results.map((value: any) => this.mapPeople(value)
       ))
     )
-    .subscribe({ next: result => this.people$.next(result) },);
+    .subscribe({ next: result => this.people$.next(result) });
 
-    return this.people$.asObservable();;
+    return this.people$.asObservable();
   }
 
   private mapHeight(height: number) {
@@ -64,6 +62,7 @@ export class PeopleService {
   }
 
   private mapPeople(value: any): People {
+
     /**
      * Pude haber optado por declarar una variable que funcione como contador (ID) e ir incrementando, ya que los
      * registros vienen ordenados por Id desde la API, pero este metodo fallaria si en algun determinado momento
@@ -85,7 +84,9 @@ export class PeopleService {
     person.height = this.mapHeight(value.height);
     person.gender = value.gender;
     person.mass = value.mass;
-    person.homeworld = this.planetService.get(value.homeworld)?.name ?? 'unknown';
+
+    // obtenemos el planeta de la persona
+    this.http.get<any>(value.homeworld).subscribe(result => person.homeworld = result.name);
 
     return person;
   }

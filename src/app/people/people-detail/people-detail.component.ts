@@ -19,18 +19,15 @@ export class PeopleDetailComponent implements OnInit {
     this.activatedRoute.params.subscribe({
       next: params => {
 
-        setTimeout(() => {
-          this.peopleService.get(params.id).subscribe(
-            {
-              next: result => {
-                this.people = result;
-              },
-              error: error => {
-                this.people = undefined;
-              }
-            });
-        }, 2000)
-
+        this.peopleService.get(params.id).subscribe(
+          {
+            next: result => {
+              this.people = result;
+            },
+            error: error => {
+              this.people = undefined;
+            }
+          });
       }
     });
 

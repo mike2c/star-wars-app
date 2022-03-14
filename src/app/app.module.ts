@@ -6,7 +6,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { NotFoundComponent } from './components/not-found/not-found.component';
 import { LinkModule } from './components/link/link.module';
-import { PlanetService } from './shared/services/planet.service';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -19,9 +19,7 @@ import { PlanetService } from './shared/services/planet.service';
     HttpClientModule,
     LinkModule
   ],
-  providers: [
-    PlanetService,
-  ],
+  providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

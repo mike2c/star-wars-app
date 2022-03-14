@@ -1,7 +1,11 @@
 import { Component, ElementRef, OnDestroy, ViewChild } from '@angular/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
-import { Subscription } from 'rxjs/internal/Subscription';
-import { SearchService } from './shared/services/search.service';
+
+const MAX_SIZE_SEARCHES: number = 4;
+export interface Search {
+  route: string,
+  value: string
+}
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -12,31 +16,22 @@ export class AppComponent implements OnDestroy {
   @ViewChild("searchInput", { read: ElementRef, static: true })
   searchInput!: ElementRef;
 
-  searches: Array<string> = new Array<string>();
-  paramsSub!: Subscription;
+  searches: Array<Search> = new Array<Search>();
 
-  constructor(public searchService: SearchService, private router: Router, private activatedRoute: ActivatedRoute) {
+  constructor(private router: Router, private activatedRoute: ActivatedRoute) {
 
-    this.paramsSub = activatedRoute.queryParams.subscribe({
-      next: (params) => {
-
-        if(params["search"]) {
-          this.searchService.updateSearches(this.router.url)
-          .subscribe({ next: (values) => this.searches = values });
-        }
-      }
-    });
-
-    this.searchService.searches.subscribe({ next: (values) => this.searches = values })
+      const searches = localStorage.getItem('searches');
+      if(searches)
+        this.searches = JSON.parse(searches);
   }
 
-  doSearch() {
+  search() {
 
     const search = this.searchInput.nativeElement.value;
-
     if(search) {
-      const queryParams: Params = { search: search };
 
+      this.updateSearches(search);
+      const queryParams: Params = { search: search };
       this.router.navigate([],
       {
         relativeTo: this.activatedRoute,
@@ -54,11 +49,23 @@ export class AppComponent implements OnDestroy {
     }
   }
 
+  updateSearches(value: string) {
+
+    this.searches.push({ route: window.location.pathname, value: value });
+
+    if(this.searches.length > MAX_SIZE_SEARCHES) {
+      const [a, ...rest] = this.searches;
+      this.searches = rest;
+    }
+
+    localStorage.setItem('searches', JSON.stringify(this.searches));
+  }
+
   selectSearch(value: string) {
     this.router.navigateByUrl(value);
   }
 
   ngOnDestroy(): void {
-    this.paramsSub.unsubscribe();
+
   }
 }

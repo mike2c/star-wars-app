@@ -1,57 +1,92 @@
 * {
   box-sizing: border-box;
 }
+
 body {
   margin: 0;
   font-family: Arial, Helvetica, sansserif;
 }
+
 .topnav {
+  display: flex;
+  align-items: center;
+  align-content: center;
+  height: 55px;
   overflow: hidden;
   background-color: #e9e9e9;
 }
+
 .topnav a {
   float: left;
   display: block;
   color: #000;
   text-align: center;
-  padding: 14px 16px;
+  height: inherit;
+  line-height: 55px;
+  padding: 0px 10px;
   text-decoration: none;
   font-size: 17px;
 }
+
 .topnav a:hover {
   background-color: #ddd;
   color: #000;
 }
+
 .topnav a.active {
   background-color: #2196f3;
   color: #fff;
 }
+
 .topnav .search-container {
   float: right;
+  background-color: white;
+  height: 45px;
+  margin-top: 5px;
+  margin-bottom: 5px;
+  border-radius: 25px;
 }
+
 .topnav input[type="text"] {
-  padding: 6px;
-  margin-top: 8px;
+  background-color: transparent;
+  display: inline-block;
+  height: 43px;
   font-size: 17px;
   border: none;
+  outline: none;
+  padding-left: 15px;
 }
-.topnav .searchcontainer button {
-  float: right;
+
+.search-container button {
+  display: inline-block;
   padding: 6px 10px;
-  margin-top: 8px;
-  margin-right: 16px;
-  background: #ddd;
+  margin-right: 4px;
+  margin-top: 4px;
+  background: transparent;
   font-size: 17px;
-  border: none;
+  border: none !important;
   cursor: pointer;
+  border-radius: 50%;
 }
+
+.search-container button:hover {
+  background-color: #ddd;
+}
+
+.search-container:has(input[type="text"]:active) {
+  border: 1px solid black;
+}
+
 .topnav .searchcontainer button:hover {
   background: #ccc;
 }
+
 @media screen and (max-width: 600px) {
+
   .topnav .search-container {
     float: none;
   }
+
   .topnav .search-container button,
   .topnav a,
   .topnav input[type="text"] {
@@ -62,7 +97,9 @@ body {
     margin: 0;
     padding: 14px;
   }
+
   .topnav input[type="text"] {
     border: 1px solid #ccc;
   }
+
 }

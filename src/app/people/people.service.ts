@@ -1,6 +1,5 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { forkJoin, zip } from 'rxjs';
 import { BehaviorSubject } from 'rxjs/internal/BehaviorSubject';
 import { Observable } from 'rxjs/internal/Observable';
 import { map, take, tap } from 'rxjs/operators';
@@ -13,9 +12,7 @@ export class PeopleService {
 
   private people$: BehaviorSubject<Array<People>> = new BehaviorSubject<Array<People>>([]);
 
-  constructor(private http: HttpClient) {
-
-  }
+  constructor(private http: HttpClient) { }
 
   public get peoples(): Observable<Array<People>> {
       return this.people$.asObservable();
